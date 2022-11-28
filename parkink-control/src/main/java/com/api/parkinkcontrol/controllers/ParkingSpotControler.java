@@ -5,6 +5,11 @@ import com.api.parkinkcontrol.models.ParkingSpotModel;
 import com.api.parkinkcontrol.services.ParkinSpotService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +53,11 @@ public class ParkingSpotControler {
 
     }
     @GetMapping
-      public ResponseEntity<List<ParkingSpotModel>>getAllParkingSpots(){
+      public ResponseEntity<Page<ParkingSpotModel>>getAllParkingSpots(
+            @PageableDefault (page =0, size = 10,
+            sort = "id",direction = Sort.Direction.ASC)Pageable pageable){
        return ResponseEntity.status(HttpStatus.OK)
-                .body(parkinSpotService.findAll());
+                .body(parkinSpotService.findAll(pageable));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneParkingSpot(
