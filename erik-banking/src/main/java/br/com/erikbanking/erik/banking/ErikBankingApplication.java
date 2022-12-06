@@ -19,7 +19,9 @@ public class ErikBankingApplication {
 
 	@GetMapping("/teste")
 		public String index (){
-			return "Ola Mundo ";
+
+
+		return "Ola Mundo ";
 		}
 
 }
