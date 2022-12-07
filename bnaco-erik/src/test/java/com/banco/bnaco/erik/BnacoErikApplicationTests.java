@@ -1,10 +1,10 @@
-package br.com.erikbanking.erik.banking;
+package com.banco.bnaco.erik;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ErikBankingApplicationTests {
+class BnacoErikApplicationTests {
 
 	@Test
 	void contextLoads() {

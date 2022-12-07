@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +26,7 @@ public class ParkingSpotControler {
 
     final ParkinSpotService parkinSpotService;
     public ParkingSpotControler(ParkinSpotService parkinSpotService) {
+
         this.parkinSpotService = parkinSpotService;
     }
 
