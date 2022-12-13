@@ -26,7 +26,6 @@ public class ParkingSpotControler {
 
     final ParkinSpotService parkinSpotService;
     public ParkingSpotControler(ParkinSpotService parkinSpotService) {
-
         this.parkinSpotService = parkinSpotService;
     }
 
