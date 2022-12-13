@@ -1,0 +1,43 @@
+@SpringBootTest
+@AutoConfigureMockMvc
+public class ControllerClienteTest {
+
+    @Mock
+    ClienteRepository clienteRepository;
+    //URL base para acesso desse controlador
+
+    private final String Base_URL ="/clientes";
+
+    //Instância do ObjectMapper para trabalhar com JSON
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    //Controlador REST tratado por meio de injeção de dependências
+   /* @Autowired
+    private ClienteController clienteController;*/
+
+    //Instância do MockMVC
+    @Autowired
+    private MockMvc mockMvc;
+
+
+
+    @Test
+    public void testaPostcomSucesso() throws Exception {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setNome_cliente("Bruno Serra");
+        clienteDTO.setNumero_cpf("123456789");
+        mockMvc.perform(post(Base_URL)
+                        .content(objectMapper.writeValueAsString(clienteDTO ))
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.codigo_cliente" ).isNumber())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nome_cliente").value("Bruno Serra"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.numero_cpf").value("123456789"));
+
+
+
+    }
+
+
+
+}
