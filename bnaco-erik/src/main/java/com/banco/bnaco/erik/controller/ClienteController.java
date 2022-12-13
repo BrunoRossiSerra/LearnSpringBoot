@@ -59,8 +59,40 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(clienteService.findAll(pageable));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteOneCliente(
+            @PathVariable (value = "id") UUID id ){
+        Optional<ClienteModel> clienteModelOptional = clienteService
+                .findByIId(id);
+        if(!clienteModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Parkink spot not found");
+        }
+
+        clienteService.delete(clienteModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Parking Spot  deleted successefuly");
 
 
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateParkingSpot
+            (@PathVariable (value = "id")
+             UUID id,@RequestBody @Valid ClienteDTO
+                     clienteDTO) {
+        Optional<ClienteModel> clienteModelOptional = clienteService
+                .findByIId(id);
+        if(!clienteModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("não tem cliente ");
+        }
+
+        var clienteModel = new ClienteModel();
+        BeanUtils.copyProperties(clienteDTO,clienteModel);
+        clienteModel.setId(clienteModelOptional.get().getId());
 
 
-}
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(clienteService.save(clienteModel));
+
+}}

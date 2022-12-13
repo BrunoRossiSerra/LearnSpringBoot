@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ClienteService {
 
     @Autowired
@@ -30,10 +31,14 @@ public class ClienteService {
     }
 
 
-    @Transactional
+
     public ClienteModel save(ClienteModel clienteModel) {
         return clienteRepository.save(clienteModel);
     }
 
+
+    public void delete(ClienteModel clienteModel) {
+        clienteRepository.delete(clienteModel);
+    }
 
 }
