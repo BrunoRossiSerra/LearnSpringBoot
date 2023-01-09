@@ -22,6 +22,8 @@ public class Medico implements Serializable {
     private String nome;
     private String email;
     private String telefone;
+
+    private String telefone_contato;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +38,7 @@ public class Medico implements Serializable {
         this.crm = dados.crm();
         this.email = dados.email();
         this.telefone = dados.telefone();
+        this.telefone_contato = dados.telefone_contato();
         this.endereco = new Endereco(dados.endereco());
         this.especialidade = dados.especialidade();
     }
